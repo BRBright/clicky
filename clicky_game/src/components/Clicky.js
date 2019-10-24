@@ -7,24 +7,25 @@ import images from "./images.json";
 
 class Clicky extends Component {
   state = {
-    currentScore: 0,
+    count: 0,
     images
   };
 
-  handleScoreChange = score => {
-    this.setState({ currentScore: score });
+  handleScoreChange = () => {
+    this.setState({ count: this.state.count + 1 });
   };
 
   render() {
     return (
       <div>
-        <Header
-          handleScoreChange={this.handleScoreChange}
-          score={this.state.currentScore}
-        />
+        <Header score={this.state.count} />
         <Wrapper>
           {this.state.images.map(images => (
-            <Cards name={images.name} image={images.image} />
+            <Cards
+              name={images.name}
+              image={images.image}
+              handleScoreChange={this.handleScoreChange}
+            />
           ))}
         </Wrapper>
         <Footer />
